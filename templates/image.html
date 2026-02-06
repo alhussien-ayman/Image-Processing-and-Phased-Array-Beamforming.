@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing & Fourier Transform</title>
+      
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/beamforman.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="d-flex align-items-center justify-content-between px-4 py-2">
+            <div class="d-flex align-items-center">
+                <div class="status-dot status-ready me-2" id="simStatus"></div>
+                <h5 class="m-0 text-accent fw-bold">Image Mixer</h5>
+            </div>
+            <div class="d-flex align-items-center">
+                <a href="/" class="btn btn-sm btn-simulator-secondary ms-2">
+                    <i class="fas fa-home me-1"></i> Home
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="split-container">
+        <div class="left-panel">
+            <div class="viewport-grid">
+                <div class="viewport-container">
+                    <div class="viewport-label">IMAGE 1</div>
+                    <div class="viewport" id="input-viewport-1">
+                        <span class="placeholder">Click to upload</span>
+                        <input type="file" id="input-file-1" accept="image/*" class="file-input">
+                    </div>
+                </div>
+                <div class="viewport-container">
+                    <div class="viewport-label">IMAGE 2</div>
+                    <div class="viewport" id="input-viewport-2">
+                        <span class="placeholder">Click to upload</span>
+                        <input type="file" id="input-file-2" accept="image/*" class="file-input">
+                    </div>
+                </div>
+                <div class="viewport-container">
+                    <div class="viewport-label">IMAGE 3</div>
+                    <div class="viewport" id="input-viewport-3">
+                        <span class="placeholder">Click to upload</span>
+                        <input type="file" id="input-file-3" accept="image/*" class="file-input">
+                    </div>
+                </div>
+                <div class="viewport-container">
+                    <div class="viewport-label">IMAGE 4</div>
+                    <div class="viewport" id="input-viewport-4">
+                        <span class="placeholder">Click to upload</span>
+                        <input type="file" id="input-file-4" accept="image/*" class="file-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="viewport-grid">
+                <div class="viewport-with-controls">
+                    <select id="component-select-1" class="component-select">
+                        <option value="magnitude">FT Magnitude</option>
+                        <option value="phase">FT Phase</option>
+                        <option value="real">FT Real</option>
+                        <option value="imaginary">FT Imaginary</option>
+                    </select>
+                    <div class="viewport component-viewport" id="component-viewport-1">
+                        <span class="placeholder">Component preview</span>
+                        <div class="filter-overlay" id="filter-overlay-1">
+                            <div class="filter-rectangle" id="filter-rect-1">
+                                <div class="resize-handle nw"></div>
+                                <div class="resize-handle ne"></div>
+                                <div class="resize-handle sw"></div>
+                                <div class="resize-handle se"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewport-with-controls">
+                    <select id="component-select-2" class="component-select">
+                        <option value="magnitude">FT Magnitude</option>
+                        <option value="phase">FT Phase</option>
+                        <option value="real">FT Real</option>
+                        <option value="imaginary">FT Imaginary</option>
+                    </select>
+                    <div class="viewport component-viewport" id="component-viewport-2">
+                        <span class="placeholder">Component preview</span>
+                        <div class="filter-overlay" id="filter-overlay-2">
+                            <div class="filter-rectangle" id="filter-rect-2">
+                                <div class="resize-handle nw"></div>
+                                <div class="resize-handle ne"></div>
+                                <div class="resize-handle sw"></div>
+                                <div class="resize-handle se"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewport-with-controls">
+                    <select id="component-select-3" class="component-select">
+                        <option value="magnitude">FT Magnitude</option>
+                        <option value="phase">FT Phase</option>
+                        <option value="real">FT Real</option>
+                        <option value="imaginary">FT Imaginary</option>
+                    </select>
+                    <div class="viewport component-viewport" id="component-viewport-3">
+                        <span class="placeholder">Component preview</span>
+                        <div class="filter-overlay" id="filter-overlay-3">
+                            <div class="filter-rectangle" id="filter-rect-3">
+                                <div class="resize-handle nw"></div>
+                                <div class="resize-handle ne"></div>
+                                <div class="resize-handle sw"></div>
+                                <div class="resize-handle se"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewport-with-controls">
+                    <select id="component-select-4" class="component-select">
+                        <option value="magnitude">FT Magnitude</option>
+                        <option value="phase">FT Phase</option>
+                        <option value="real">FT Real</option>
+                        <option value="imaginary">FT Imaginary</option>
+                    </select>
+                    <div class="viewport component-viewport" id="component-viewport-4">
+                        <span class="placeholder">Component preview</span>
+                        <div class="filter-overlay" id="filter-overlay-4">
+                            <div class="filter-rectangle" id="filter-rect-4">
+                                <div class="resize-handle nw"></div>
+                                <div class="resize-handle ne"></div>
+                                <div class="resize-handle sw"></div>
+                                <div class="resize-handle se"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="viewport-container output-container" id="output-container-1">
+                    <div class="viewport-label">OUTPUT 1</div>
+                    <div class="viewport output-viewport" id="output-viewport-1">
+                        <span class="placeholder">Mixed output will appear here</span>
+                    </div>
+                </div>
+                <div class="viewport-container output-container" id="output-container-2">
+                    <div class="viewport-label">OUTPUT 2</div>
+                    <div class="viewport output-viewport" id="output-viewport-2">
+                        <span class="placeholder">Mixed output will appear here</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h3 class="panel-title">Control Dashboard</h3>
+            
+            <div class="control-group">
+                <h4 class="control-title">Image 1</h4>
+                <div class="slider-wrapper">
+                    <label for="weight-a-1"><span id="label-a-1">Mag</span>: <span id="weight-a-value-1">0</span>%</label>
+                    <input type="range" id="weight-a-1" class="weight-slider" min="0" max="100" value="0">
+                </div>
+                <div class="slider-wrapper">
+                    <label for="weight-b-1"><span id="label-b-1">Phase</span>: <span id="weight-b-value-1">0</span>%</label>
+                    <input type="range" id="weight-b-1" class="weight-slider" min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4 class="control-title">Image 2</h4>
+                <div class="slider-wrapper">
+                    <label for="weight-a-2"><span id="label-a-2">Mag</span>: <span id="weight-a-value-2">0</span>%</label>
+                    <input type="range" id="weight-a-2" class="weight-slider" min="0" max="100" value="0">
+                </div>
+                <div class="slider-wrapper">
+                    <label for="weight-b-2"><span id="label-b-2">Phase</span>: <span id="weight-b-value-2">0</span>%</label>
+                    <input type="range" id="weight-b-2" class="weight-slider" min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4 class="control-title">Image 3</h4>
+                <div class="slider-wrapper">
+                    <label for="weight-a-3"><span id="label-a-3">Mag</span>: <span id="weight-a-value-3">0</span>%</label>
+                    <input type="range" id="weight-a-3" class="weight-slider" min="0" max="100" value="0">
+                </div>
+                <div class="slider-wrapper">
+                    <label for="weight-b-3"><span id="label-b-3">Phase</span>: <span id="weight-b-value-3">0</span>%</label>
+                    <input type="range" id="weight-b-3" class="weight-slider" min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4 class="control-title">Image 4</h4>
+                <div class="slider-wrapper">
+                    <label for="weight-a-4"><span id="label-a-4">Mag</span>: <span id="weight-a-value-4">0</span>%</label>
+                    <input type="range" id="weight-a-4" class="weight-slider" min="0" max="100" value="0">
+                </div>
+                <div class="slider-wrapper">
+                    <label for="weight-b-4"><span id="label-b-4">Phase</span>: <span id="weight-b-value-4">0</span>%</label>
+                    <input type="range" id="weight-b-4" class="weight-slider" min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4 class="control-title">Mixing Mode</h4>
+                <select id="unified-mode-select" class="mode-select">
+                    <option value="magnitude_phase">Magnitude & Phase</option>
+                    <option value="real_imaginary">Real & Imaginary</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <h4 class="control-title">Frequency Filter</h4>
+                <div class="filter-controls">
+                    <div class="radio-group">
+                        <input type="radio" id="filter-inner" name="filter-mode" value="inner" checked>
+                        <label for="filter-inner">Keep Inner (Low Freq)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="filter-outer" name="filter-mode" value="outer">
+                        <label for="filter-outer">Keep Outer (High Freq)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="filter-all" name="filter-mode" value="all">
+                        <label for="filter-all">All Regions</label>
+                    </div>
+                    <button id="filter-reset" class="filter-button">Reset Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status-indicator" id="status-indicator">
+        <span id="status-text"></span>
+    </div>
+
+    <div class="adjustment-indicator" id="adjustment-indicator">
+        <div class="adjustment-value">Brightness: <span id="adj-brightness">1.00</span></div>
+        <div class="adjustment-value">Contrast: <span id="adj-contrast">1.00</span></div>
+    </div>
+
+    <!-- OOP Classes with Filter Rectangle Feature -->
+    <script src="/static/js/image/Viewport.js"></script>
+    <script src="/static/js/image/Image.js"></script>
+    <script src="/static/js/image/InputViewport.js"></script>
+    <script src="/static/js/image/ComponentViewport.js"></script>
+    <script src="/static/js/image/OutputViewport.js"></script>
+    <script src="/static/js/image/Filter.js"></script>
+    <script src="/static/js/image/ImageMixer.js"></script>
+    
+    <!-- Main entry point -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Create OOP instances
+                window.imageMixer = new ImageMixer();
+                window.imageMixer.initialize();
+                console.log('Image Mixer OOP initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize OOP Image Mixer:', error);
+                
+                // Fallback to original non-OOP code
+                console.log('Falling back to original implementation...');
+                // Load the original image.js
+                const script = document.createElement('script');
+                script.src = '/static/js/image_original.js';
+                script.onload = () => {
+                    console.log('Original image.js loaded as fallback');
+                };
+                document.head.appendChild(script);
+            }
+        });
+    </script>
+</body>
+</html>
