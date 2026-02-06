@@ -1,4 +1,4 @@
-# Image Processing & Beamforming Suite 🌊
+# Image Processing & Beamforming Suite 
 
 <div align="center">
 
