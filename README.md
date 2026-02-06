@@ -383,50 +383,11 @@ ImageProcessingAndBeamforming/
 3. **Radar Systems**: Design arrays for target detection and tracking
 4. **Acoustic Beamforming**: Apply principles to microphone arrays for sound source localization
 5. **Satellite Communications**: Analyze phased arrays for satellite uplinks/downlinks
-
----
-
-## 🔮 Future Enhancements
-
-- [ ] 3D beamforming visualization
-- [ ] Video processing support for image mixer
-- [ ] Export beam patterns as publication-ready figures
-- [ ] Machine learning-based automatic array optimization
-- [ ] Support for non-uniform array geometries
-- [ ] Real-time collaboration features
-- [ ] Mobile app version
-- [ ] Integration with external simulation tools (MATLAB, GNU Radio)
-- [ ] Batch processing for multiple images
-- [ ] Advanced filter types (Gaussian, Butterworth, custom)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-Please ensure your code follows the existing style and includes appropriate documentation.
-
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- Fourier Transform algorithms inspired by classical signal processing theory
-- Beamforming calculations based on phased array antenna principles
-- UI design influenced by modern dashboard aesthetics
-- Special thanks to the open-source community for tools like Django, Plotly.js, and Bootstrap
 
 ---
 
@@ -440,33 +401,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 > Built with ❤️ as a collaborative project in Digital Signal Processing
 
 ---
-
-## 📞 Support
-
-Having issues or questions? Here are some resources:
-
-- **Documentation**: Check the in-app help sections
-- **Issues**: Open an issue on GitHub for bug reports
-- **Email**: Contact the development team
-- **Discussion**: Join our community forum (coming soon)
-
----
-
-## 📈 Version History
-
-- **v1.0.0** (Current)
-  - Initial release
-  - Image mixer with 4-image support
-  - Beamforming simulator with linear and curved arrays
-  - Three application presets
-  - Real-time visualization
-
----
-
-<div align="center">
-
-**⭐ Star this repository if you find it helpful!**
-
-Made with Python, JavaScript, and a passion for signal processing
-
-</div>
